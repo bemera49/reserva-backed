@@ -1,4 +1,6 @@
-//correr el back
+Este es el bacnk que funciona con el front de angular llamado reserva-front
+
+-- correr el back
 **** No pude configurar para subir al git por cuestion de tiempo****
 1.Se debe configurar la base de datos en el .env
 2. correr las migraciones
@@ -100,4 +102,3 @@ Método: DELETE
 Headers:
 Authorization: Bearer {tu_token}
 Respuesta Esperada: Código 204 sin contenido.
->>>>>>> master
