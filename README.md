@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# reserva-backed
-=======
 //correr el back
 **** No pude configurar para subir al git por cuestion de tiempo****
 1.Se debe configurar la base de datos en el .env
