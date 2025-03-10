@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class EventController extends Controller
 {
@@ -54,7 +56,7 @@ class EventController extends Controller
      * )
      */
 
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         $query = Event::query();
 
@@ -105,7 +107,7 @@ class EventController extends Controller
      * )
      */
 
-    public function store(Request $request)
+    public function store(Request $request): Event
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
@@ -114,15 +116,23 @@ class EventController extends Controller
             'location' => 'required'
         ]);
 
-        return Event::create($validated);
+        $event = new Event($validated);
+        $event->save();
+
+        return $event;
     }
 
-    public function show(Event $event)
+    public function show(Event $event): Event
     {
         return $event->load('reservations');
     }
 
-    public function update(Request $request, Event $event)
+    /**
+    *
+    * @return update Event
+    */
+
+    public function update(Request $request, Event $event): Event
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
@@ -135,7 +145,11 @@ class EventController extends Controller
         return $event;
     }
 
-    public function destroy(Event $event)
+    /**
+    * return response
+    */
+
+    public function destroy(Event $event): Response
     {
         $event->delete();
         return response()->noContent();
